@@ -72,9 +72,13 @@ function uploadImage(input) {
     return fetch('https://anonfiles.p.rapidapi.com/upload', options)
         .then(response => response.json())
         .then(response => { 
+            console.log(response)
             const imageURL = response.data.file.url.full;
 
             return imageURL;
         })
         .catch(err => console.error(err));
-} // uploadImage(createBinModalFirstFileInput).then(response => console.log(response));
+}
+
+// Gonna have to start over again, this API won't work. Use IMGUR api when get home, can't
+// access on school wifi. 
