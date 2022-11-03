@@ -57,6 +57,6 @@ function saveData() {
 }
 
 function addTestData() {
-  localStorage.setItem('bins', [[{"name":"Christmas Tree Lights","img":"https://cdn-113.anonfiles.com/j4A6H9F1y8/e52bd5de-1667497777/xmaslights.jpg"}]])
+  localStorage.setItem('bins', JSON.stringify([[{"name":"Christmas Tree Lights","img":"https://cdn-113.anonfiles.com/j4A6H9F1y8/e52bd5de-1667497777/xmaslights.jpg"}]]))
   saveData();
 }
