@@ -64,18 +64,17 @@ function uploadImage(input) {
         method: 'POST',
         headers: {
             'X-RapidAPI-Key': 'a984782380msh66b8f7936e19b2cp19e3b0jsn6a15a6bd4b78',
-            'X-RapidAPI-Host': 'anonfiles.p.rapidapi.com'
+            'X-RapidAPI-Host': 'postput.p.rapidapi.com'
         },
         body: data
     };
 
-    return fetch('https://anonfiles.p.rapidapi.com/upload', options)
+    return fetch('https://postput.p.rapidapi.com/', options)
         .then(response => response.json())
         .then(response => { 
-            console.log(response)
-            const imageURL = response.data.file.url.full;
+            return response[0].urls[0];
 
-            return imageURL;
+            // const URL = 
         })
         .catch(err => console.error(err));
 }
