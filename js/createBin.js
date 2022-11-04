@@ -1,6 +1,7 @@
 const addItemBtn = document.querySelector('.addAnotherItem');
 const createBinBtn = document.querySelector('.createBin');
 const createBinModalForm = document.querySelector('.createBinModalForm');
+const extraItems = document.querySelectorAll('.extraItems');
 const createBinModalFirstFileInput = document.querySelector('.createBinModalFirstFileInput');
 const createBinModalFirstNameInput = document.querySelector('.createBinModalFirstNameInput');
 
@@ -37,23 +38,21 @@ addItemBtn.addEventListener("click", (e) => {
     if (createBinModalForm.checkValidity()) {
         addItemBtn.insertAdjacentHTML('beforebegin', '<hr/>');
         addItemBtn.insertAdjacentHTML('beforebegin', `
-        <input type="text" class="form-control mt-3" placeholder="Item name" aria-label="Item name" required>
-        <input type="file" class="form-control mt-3" required>
+        <input type="text" class="form-control mt-3 extraItems extraItems-name" placeholder="Item name" aria-label="Item name" required>
+        <input type="file" class="form-control mt-3 extraItems extraItems-file" required>
         <button type="button" class="btn btn-danger mt-3 w-100 removeItem">Remove item</button>
         `);
     }
 })
 
 createBinBtn.addEventListener("click", (e) => {
-    uploadImage(createBinModalFirstFileInput)
-        .then(response => { 
-            console.log(response)
-
-            createBin(createBinModalFirstNameInput.value, response);
-
-            // close modal
-            // remove input values
-        });
+    if (createBinModalFirstFileInput.value !== '' && createBinModalFirstNameInput.value !== '') {
+        uploadImage(createBinModalFirstFileInput)
+            .then(response => { 
+                createBin(createBinModalFirstNameInput.value, response);
+                
+            });
+    }
 });
 
 function uploadImage(input) {
@@ -78,6 +77,3 @@ function uploadImage(input) {
         })
         .catch(err => console.error(err));
 }
-
-// Gonna have to start over again, this API won't work. Use IMGUR api when get home, can't
-// access on school wifi. 
