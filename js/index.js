@@ -67,20 +67,19 @@ function addExtraItems() {
   const extraFileItems = document.querySelectorAll('.extraItems-file');
 
   if (allExtraItems.length !== 0) {  
+    console.log('Extra Items Detected!');
     for (let i = 0; i < extraFileItems.length; i++) {
 
       if (extraNameItems[i].value !== '') {
-        const bin = data.length;
+        const bin = data.length - 1;
         const name = extraNameItems[i].value;
         
         if (extraFileItems[i].value !== '') {
           uploadImage(extraFileItems[i])
           .then(response => 
-            console.log(response)
-
-
+            addItemToBin(bin, name, response)
             );
-
+            
             // addItemToBin(bin, name, url);
             // How to class this ^ with response. I can't figure out how to get the URL properly passed
         }

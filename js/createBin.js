@@ -35,6 +35,8 @@ document.querySelector('.container').addEventListener('click', (e) => {
 });
 
 addItemBtn.addEventListener("click", (e) => {
+    let binCreated = false;
+
     if (createBinModalForm.checkValidity()) {
         addItemBtn.insertAdjacentHTML('beforebegin', '<hr/>');
         addItemBtn.insertAdjacentHTML('beforebegin', `
@@ -42,17 +44,41 @@ addItemBtn.addEventListener("click", (e) => {
         <input type="file" class="form-control mt-3 extraItems extraItems-file" required>
         <button type="button" class="btn btn-danger mt-3 w-100 removeItem">Remove item</button>
         `);
+    
+        if (binCreated == false) {
+            if (createBinModalFirstFileInput.value !== '' && createBinModalFirstNameInput.value !== '') {
+                uploadImage(createBinModalFirstFileInput)
+                    .then(response => { 
+                        createBin(createBinModalFirstNameInput.value, response);
+                    });
+            }
+    
+            binCreated = true;
+    
+        }
+
     }
 })
 
 createBinBtn.addEventListener("click", (e) => {
-    if (createBinModalFirstFileInput.value !== '' && createBinModalFirstNameInput.value !== '') {
-        uploadImage(createBinModalFirstFileInput)
-            .then(response => { 
-                createBin(createBinModalFirstNameInput.value, response);
-                
-            });
+    const allExtraItems = document.querySelectorAll('.extraItems');
+    if (allExtraItems.length == 0) {
+        if (createBinModalFirstFileInput.value !== '' && createBinModalFirstNameInput.value !== '') {
+            uploadImage(createBinModalFirstFileInput)
+                .then(response => { 
+                    createBin(createBinModalFirstNameInput.value, response);
+                });
+        }
+    } else {
+        addExtraItems();
     }
+
+    console.log(`That bin's ID is ${data.length - 1}`);
+
+    setTimeout(() => {
+        location.reload();
+    }, 3000)
+
 });
 
 function uploadImage(input) {
