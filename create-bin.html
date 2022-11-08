@@ -10,7 +10,7 @@
     <script src="js/index.js" defer></script>
     <script src="js/createBin.js" defer></script>
 </head>
-<body onload="getData()">
+<body onload="getData(), fixNoData()">
 
     <div class="container">
 
@@ -39,7 +39,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary createBin">Create bin</button>
+                        <button type="button" class="btn btn-primary createBin" data-bs-dismiss="modal">Create bin</button>
                     </div>
                 </div>
             </div>

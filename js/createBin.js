@@ -6,13 +6,21 @@ const createBinModalFirstFileInput = document.querySelector('.createBinModalFirs
 const createBinModalFirstNameInput = document.querySelector('.createBinModalFirstNameInput');
 
 function getData() {
-    const savedData = JSON.parse(localStorage.getItem('bins'));
-    return savedData;
-}
+    if (localStorage.getItem('bins') !== '') {
+      const savedData = JSON.parse(localStorage.getItem('bins'));
+      return savedData;
+    } else {
+      console.log('No data stored.')
+    }
+  }
 
 function createBin(name, imgURL) {
-    data.push([{"name": name, "img": imgURL}]);
-    saveData();
+    if (localStorage.getItem('bins') !== '') {
+        data.push([{"name": name, "img": imgURL}]);
+        saveData();
+    } else {
+        console.log(`No data stored, you need inital data! Run 'localStorage.setItem('bins', JSON.stringify([[{"name":"Christmas Tree Lights","img":"https://cdn-113.anonfiles.com/j4A6H9F1y8/e52bd5de-1667497777/xmaslights.jpg"}]]));' in console.`)
+    }    
 }
 
 function addItemToBin(bin, name, imgURL) {
@@ -73,11 +81,18 @@ createBinBtn.addEventListener("click", (e) => {
         addExtraItems();
     }
 
-    console.log(`That bin's ID is ${data.length - 1}`);
+    if (data !== undefined) {
+        console.log(`That bin's ID is ${data.length - 1}`);
+        document.querySelector('.btn').insertAdjacentHTML('beforebegin', `
+        <div class="alert alert-success alert-dismissible show fade mt-3" role="alert">
+            That bin's ID is ${data.length - 1}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    `)
+    } else {
+        console.log(`No data stored, you need inital data! Run 'localStorage.setItem('bins', JSON.stringify([[{"name":"Christmas Tree Lights","img":"https://cdn-113.anonfiles.com/j4A6H9F1y8/e52bd5de-1667497777/xmaslights.jpg"}]]));' in console.`)
+    }
 
-    setTimeout(() => {
-        location.reload();
-    }, 3000)
 
 });
 
@@ -103,3 +118,6 @@ function uploadImage(input) {
         })
         .catch(err => console.error(err));
 }
+
+// Fix when creating a new bin with multiple items, it creates two bins, one with just the initial item
+// and another with the intial and the extras
