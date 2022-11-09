@@ -42,9 +42,9 @@ document.querySelector('.container').addEventListener('click', (e) => {
     }
 });
 
-addItemBtn.addEventListener("click", (e) => {
-    let binCreated = false;
+let binCreated = false;
 
+addItemBtn.addEventListener("click", (e) => {
     if (createBinModalForm.checkValidity()) {
         addItemBtn.insertAdjacentHTML('beforebegin', '<hr/>');
         addItemBtn.insertAdjacentHTML('beforebegin', `
