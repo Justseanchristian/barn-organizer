@@ -70,6 +70,7 @@ addItemBtn.addEventListener("click", (e) => {
 
 createBinBtn.addEventListener("click", (e) => {
     const allExtraItems = document.querySelectorAll('.extraItems');
+
     if (allExtraItems.length == 0) {
         if (createBinModalFirstFileInput.value !== '' && createBinModalFirstNameInput.value !== '') {
             uploadImage(createBinModalFirstFileInput)
@@ -113,8 +114,6 @@ function uploadImage(input) {
         .then(response => response.json())
         .then(response => { 
             return response[0].urls[0];
-
-            // const URL = 
         })
         .catch(err => console.error(err));
 }

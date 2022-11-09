@@ -82,10 +82,7 @@ function addExtraItems() {
           uploadImage(extraFileItems[i])
           .then(response => 
             addItemToBin(bin, name, response)
-            );
-            
-            // addItemToBin(bin, name, url);
-            // How to class this ^ with response. I can't figure out how to get the URL properly passed
+            );            
         }
       }
 
